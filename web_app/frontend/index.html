@@ -3,139 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart ID Photo Pro - AI智能证件照</title>
+    <title>Smart ID Photo - 登录</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .hidden { display: none; }
+        /* 自定义动画 */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans">
+<body class="bg-gray-100/50 min-h-screen flex items-center justify-center font-sans antialiased">
 
-    <!-- 登录/注册容器 -->
-    <div id="auth-container" class="bg-white p-8 rounded-xl shadow-lg w-96">
-        <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold text-blue-600">Smart ID Photo</h1>
-            <p class="text-gray-500 text-sm mt-1">AI 赋能 · 专业证件照制作</p>
-        </div>
+    <!-- 登录弹窗容器 -->
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-[480px] p-8 md:p-12 relative fade-in mx-4">
+        
+        <!-- 关闭按钮 -->
+        <button class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
 
-        <!-- 登录表单 -->
-        <div id="login-form">
-            <h2 class="text-lg font-semibold mb-4">登录</h2>
-            <input type="email" id="login-email" placeholder="邮箱" class="w-full p-3 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="password" id="login-password" placeholder="密码" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button onclick="login()" class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition">立即登录</button>
-            <p class="text-center mt-4 text-sm text-gray-600">
-                没有账号？ <a href="#" onclick="toggleAuth()" class="text-blue-500 hover:underline">去注册</a>
+        <!-- 标题区 -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-3">登录或注册</h1>
+            <p class="text-gray-500 text-sm leading-relaxed px-4">
+                你将获得更加智能的回复并能上传文件、图片等内容。
             </p>
         </div>
 
-        <!-- 注册表单 (默认隐藏) -->
-        <div id="register-form" class="hidden">
-            <h2 class="text-lg font-semibold mb-4">注册新账号</h2>
-            <input type="email" id="reg-email" placeholder="输入邮箱" class="w-full p-3 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-green-500">
-            <input type="password" id="reg-password" placeholder="设置密码" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-green-500">
-            <button onclick="register()" class="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">注册并登录</button>
-            <p class="text-center mt-4 text-sm text-gray-600">
-                已有账号？ <a href="#" onclick="toggleAuth()" class="text-blue-500 hover:underline">去登录</a>
-            </p>
+        <!-- 第三方登录列表 -->
+        <div class="space-y-3">
+            <!-- Google -->
+            <button class="w-full flex items-center justify-center space-x-3 border border-gray-300 rounded-full py-3 hover:bg-gray-50 transition relative">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 absolute left-6" alt="Google">
+                <span class="text-gray-700 font-medium">继续使用 Google 登录</span>
+            </button>
+
+            <!-- Apple -->
+            <button class="w-full flex items-center justify-center space-x-3 border border-gray-300 rounded-full py-3 hover:bg-gray-50 transition relative">
+                <img src="https://www.svgrepo.com/show/445136/apple.svg" class="w-5 h-5 absolute left-6" alt="Apple">
+                <span class="text-gray-700 font-medium">继续使用 Apple 登录</span>
+            </button>
+
+            <!-- GitHub (新增) -->
+            <button class="w-full flex items-center justify-center space-x-3 border border-gray-300 rounded-full py-3 hover:bg-gray-50 transition relative">
+                <img src="https://www.svgrepo.com/show/512317/github-142.svg" class="w-5 h-5 absolute left-6" alt="GitHub">
+                <span class="text-gray-700 font-medium">继续使用 GitHub 登录</span>
+            </button>
+
+            <!-- Microsoft -->
+            <button class="w-full flex items-center justify-center space-x-3 border border-gray-300 rounded-full py-3 hover:bg-gray-50 transition relative">
+                <img src="https://www.svgrepo.com/show/452062/microsoft.svg" class="w-5 h-5 absolute left-6" alt="Microsoft">
+                <span class="text-gray-700 font-medium">继续使用 Microsoft 登录</span>
+            </button>
         </div>
+
+        <!-- 分割线 -->
+        <div class="relative my-8">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-200"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+                <span class="px-4 bg-white text-gray-500">或</span>
+            </div>
+        </div>
+
+        <!-- 邮箱表单区域 -->
+        <div id="email-flow">
+            <!-- 步骤1: 输入邮箱 -->
+            <div id="step-email">
+                <div class="relative mb-4">
+                    <input type="email" id="email-input" placeholder="电子邮件地址" 
+                        class="w-full px-5 py-4 border border-gray-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition">
+                </div>
+                <button onclick="nextStep()" class="w-full bg-black text-white font-bold py-4 rounded-full hover:bg-gray-800 transition">
+                    继续
+                </button>
+            </div>
+
+            <!-- 步骤2: 输入密码 (点击继续后显示) -->
+            <div id="step-password" class="hidden fade-in">
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <span id="display-email" class="text-sm font-medium text-gray-700">user@example.com</span>
+                    <a href="#" onclick="prevStep()" class="text-sm text-blue-600 hover:underline">修改</a>
+                </div>
+                <div class="relative mb-6">
+                    <input type="password" id="password-input" placeholder="输入密码" 
+                        class="w-full px-5 py-4 border border-gray-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition">
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="handleAuth('login')" class="flex-1 bg-black text-white font-bold py-4 rounded-full hover:bg-gray-800 transition">
+                        登录
+                    </button>
+                    <button onclick="handleAuth('register')" class="flex-1 bg-white border-2 border-black text-black font-bold py-4 rounded-full hover:bg-gray-50 transition">
+                        注册
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部协议 -->
+        <p class="text-center text-xs text-gray-400 mt-8">
+            点击“继续”即表示您同意我们的 <a href="#" class="underline">服务条款</a> 和 <a href="#" class="underline">隐私政策</a>。
+        </p>
     </div>
 
-    <!-- 主工作台 (登录后显示) -->
-    <div id="app-container" class="hidden w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row h-[80vh]">
-        
-        <!-- 左侧：操作区 -->
-        <div class="w-full md:w-1/3 bg-gray-50 p-6 border-r flex flex-col">
-            <div class="mb-6">
-                <h2 class="text-xl font-bold mb-2">上传照片</h2>
-                <div class="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center cursor-pointer hover:bg-blue-50 transition relative" onclick="document.getElementById('file-upload').click()">
-                    <span class="text-4xl">📸</span>
-                    <p class="text-sm text-gray-500 mt-2">点击或拖拽上传</p>
-                    <input type="file" id="file-upload" class="hidden" accept="image/*" onchange="handleFileSelect(event)">
-                </div>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">选择尺寸</label>
-                <select id="size-select" class="w-full p-2 border rounded">
-                    <option value="1">一寸 (295x413)</option>
-                    <option value="2">二寸 (413x579)</option>
-                    <option value="custom">自定义...</option>
-                </select>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">背景颜色</label>
-                <div class="flex space-x-2">
-                    <div class="w-8 h-8 rounded-full bg-blue-500 cursor-pointer ring-2 ring-offset-2 ring-blue-500"></div>
-                    <div class="w-8 h-8 rounded-full bg-white border cursor-pointer"></div>
-                    <div class="w-8 h-8 rounded-full bg-red-500 cursor-pointer"></div>
-                </div>
-            </div>
-
-            <div class="mt-auto">
-                <button onclick="processPhoto()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold shadow-lg hover:bg-blue-700">🚀 开始生成</button>
-            </div>
-        </div>
-
-        <!-- 右侧：预览区 -->
-        <div class="w-full md:w-2/3 bg-gray-200 flex items-center justify-center p-6 relative">
-            <p id="preview-placeholder" class="text-gray-400">暂无预览，请先上传照片</p>
-            <img id="preview-img" class="hidden max-h-full max-w-full shadow-2xl rounded" src="" alt="预览">
-            
-            <!-- 用户信息 & 退出 -->
-            <div class="absolute top-4 right-4 flex items-center space-x-4">
-                <span id="user-email" class="text-sm text-gray-600 bg-white px-3 py-1 rounded shadow">user@example.com</span>
-                <button onclick="logout()" class="text-sm text-red-500 hover:text-red-700">退出</button>
-            </div>
-        </div>
+    <!-- 简单的 Toast 提示 -->
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full shadow-lg hidden transition-opacity duration-300">
+        提示信息
     </div>
 
     <script>
         const API_URL = "http://localhost:8000/api";
-        let token = localStorage.getItem("access_token");
-
-        // 初始化检查登录状态
-        if (token) {
-            showApp();
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
         }
 
-        function toggleAuth() {
-            document.getElementById('login-form').classList.toggle('hidden');
-            document.getElementById('register-form').classList.toggle('hidden');
+        function nextStep() {
+            const email = document.getElementById('email-input').value;
+            if (!email || !email.includes('@')) {
+                showToast("请输入有效的电子邮件地址");
+                return;
+            }
+            document.getElementById('display-email').innerText = email;
+            document.getElementById('step-email').classList.add('hidden');
+            document.getElementById('step-password').classList.remove('hidden');
         }
 
-        async function login() {
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+        function prevStep() {
+            document.getElementById('step-password').classList.add('hidden');
+            document.getElementById('step-email').classList.remove('hidden');
+        }
+
+        async function handleAuth(type) {
+            const email = document.getElementById('email-input').value;
+            const password = document.getElementById('password-input').value;
+            
+            if (!password) {
+                showToast("请输入密码");
+                return;
+            }
+
+            const endpoint = type === 'login' ? '/auth/token' : '/auth/register';
             
             try {
-                const res = await fetch(`${API_URL}/auth/token`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({email, password})
-                });
-                
-                if (res.ok) {
-                    const data = await res.json();
-                    localStorage.setItem("access_token", data.access_token);
-                    localStorage.setItem("user_email", email);
-                    token = data.access_token;
-                    showApp();
-                } else {
-                    alert("登录失败，请检查账号密码");
-                }
-            } catch (e) {
-                alert("连接服务器失败");
-            }
-        }
-
-        async function register() {
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-
-            try {
-                const res = await fetch(`${API_URL}/auth/register`, {
+                const res = await fetch(`${API_URL}${endpoint}`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({email, password})
@@ -144,71 +160,15 @@
                 if (res.ok) {
                     const data = await res.json();
                     localStorage.setItem("access_token", data.access_token);
-                    localStorage.setItem("user_email", email);
-                    token = data.access_token;
-                    showApp();
+                    showToast(type === 'login' ? "登录成功！" : "注册成功！");
+                    // 实际项目中这里应该跳转到主 App 界面
+                    setTimeout(() => alert("进入主界面... (TODO: 连接到上传页面)"), 1000);
                 } else {
                     const err = await res.json();
-                    alert("注册失败: " + err.detail);
+                    showToast(err.detail || "操作失败，请检查账号密码");
                 }
             } catch (e) {
-                alert("连接服务器失败");
-            }
-        }
-
-        function showApp() {
-            document.getElementById('auth-container').classList.add('hidden');
-            document.getElementById('app-container').classList.remove('hidden');
-            document.getElementById('user-email').innerText = localStorage.getItem("user_email");
-        }
-
-        function logout() {
-            localStorage.removeItem("access_token");
-            location.reload();
-        }
-
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = document.getElementById('preview-img');
-                    img.src = e.target.result;
-                    img.classList.remove('hidden');
-                    document.getElementById('preview-placeholder').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        async function processPhoto() {
-            const fileInput = document.getElementById('file-upload');
-            if (!fileInput.files[0]) return alert("请先上传照片");
-
-            const formData = new FormData();
-            formData.append("file", fileInput.files[0]);
-
-            const btn = document.querySelector('button[onclick="processPhoto()"]');
-            btn.innerText = "⏳ 处理中...";
-            btn.disabled = true;
-
-            try {
-                const res = await fetch(`${API_URL}/upload`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: formData
-                });
-                
-                const data = await res.json();
-                alert("图片已上传！(后端 AI 处理逻辑待连接)");
-                console.log(data);
-            } catch (e) {
-                alert("上传失败");
-            } finally {
-                btn.innerText = "🚀 开始生成";
-                btn.disabled = false;
+                showToast("连接服务器失败");
             }
         }
     </script>
