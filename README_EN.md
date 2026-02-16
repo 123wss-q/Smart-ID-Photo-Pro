@@ -56,6 +56,8 @@ English / [中文](README.md) / [日本語](README_JP.md) / [한국어](README_K
 
 - Online Experience: [![SwanHub Demo](https://img.shields.io/static/v1?label=Demo&message=SwanHub%20Demo&color=blue)](https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo)、[![Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/TheEeeeLin/HivisionIDPhotos)、[![][modelscope-shield]][modelscope-link]、[![][compshare-shield]][compshare-link]
 
+- 2026.02.16: ✨ **Major Update: Web APP Architecture** | 🚀 Added FastAPI Backend + Tailwind Frontend | 🔐 User Login/Registration System | 📦 Virtual Environment Isolation
+
 - 2024.11.20: Gradio Demo adds **Print Layout** option, supports six-inch, five-inch, A4, 3R, and 4R layout sizes
 - 2024.11.16: API interface adds beauty effect parameter
 - 2024.09.24: API interface adds base64 image input option | Gradio Demo adds **Layout Photo Cropping Lines** feature

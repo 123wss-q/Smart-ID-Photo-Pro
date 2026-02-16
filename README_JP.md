@@ -53,6 +53,8 @@
 
 - オンライン体験： [![SwanHub Demo](https://img.shields.io/static/v1?label=Demo&message=SwanHub%20Demo&color=blue)](https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo)、[![Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/TheEeeeLin/HivisionIDPhotos)、[![][modelscope-shield]][modelscope-link]、[![][compshare-shield]][compshare-link]
 
+- 2026.02.16: ✨ **大型アップデート：Webアプリ化** | 🚀 FastAPIバックエンド + Tailwindフロントエンド追加 | 🔐 ユーザーログイン/登録システム対応 | 📦 仮想環境による依存関係の分離
+
 - 2024.11.20: Gradioデモに**印刷レイアウト**オプションを追加、六つ切り、五つ切り、A4、3R、4Rレイアウトサイズをサポート
 - 2024.11.16: APIインターフェースに美顔効果パラメータを追加
 - 2024.09.24: APIインターフェースにbase64画像入力オプションを追加 | Gradioデモに**レイアウト写真トリミングライン**機能を追加
