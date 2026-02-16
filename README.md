@@ -1,3 +1,13 @@
+# Smart-ID-Photo-Pro (AI 智能证件照专业版)
+
+## 🤩 最近更新 / Latest Updates
+
+- **2026.02.16**: ✨ **重磅更新 Web APP 架构** | 🚀 新增 FastAPI 后端 + Tailwind 前端界面 | 🔐 支持用户登录/注册系统 | 📦 引入虚拟环境隔离
+- **2024.11.20**: Gradio Demo增加打印排版选项卡，支持六寸、五寸、A4、3R、4R五种排版尺寸
+- **2024.11.16**: API接口增加美颜参数
+
+---
+
 <div align="center">
 
 <img alt="hivision_logo" src="assets/hivision_logo.png" width=120 height=120>
